@@ -3,7 +3,7 @@ package de.holisticon.zeitzuhelfen.dto;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum Requirements {
+public enum Requirement {
     CAR("Auto vorhanden"),
     ANIMALS("Kontakt mit Tieren"),
     HAVY_LOAD("Schwere Hebearbeit"),

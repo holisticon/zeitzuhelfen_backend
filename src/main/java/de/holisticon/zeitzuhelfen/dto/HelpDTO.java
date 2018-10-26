@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Builder
 public class HelpDTO {
 
-    List<Requirements> requirementsList;
+    List<Requirement> requirementsList;
     private Long id;
     private String topic;
     private Date from;
@@ -23,7 +23,7 @@ public class HelpDTO {
     private String remarks;
 
     @JsonCreator
-    public HelpDTO(@JsonProperty("requirementsList") List<Requirements> requirementsList,
+    public HelpDTO(@JsonProperty("requirementsList") List<Requirement> requirementsList,
                    @JsonProperty("id") Long id,
                    @JsonProperty("topic") String topic,
                    @JsonProperty("from") Date from,
@@ -43,7 +43,7 @@ public class HelpDTO {
                 .topic(entity.getTopic())
                 .from(entity.getStart())
                 .to(entity.getEnd())
-                .requirementsList(entity.getRequirements().stream().map(r -> Requirements.valueOf(r.getRequirement())).collect(Collectors.toList()))
+                .requirementsList(entity.getRequirements().stream().map(r -> Requirement.valueOf(r.getRequirement())).collect(Collectors.toList()))
                 .build();
     }
 
@@ -53,7 +53,7 @@ public class HelpDTO {
                 .from(entity.getStart())
                 .to(entity.getEnd())
                 .remarks(entity.getRemarks())
-                .requirementsList(entity.getRequirements().stream().map(r -> Requirements.valueOf(r.getRequirement())).collect(Collectors.toList()))
+                .requirementsList(entity.getRequirements().stream().map(r -> Requirement.valueOf(r.getRequirement())).collect(Collectors.toList()))
                 .build();
     }
 }
