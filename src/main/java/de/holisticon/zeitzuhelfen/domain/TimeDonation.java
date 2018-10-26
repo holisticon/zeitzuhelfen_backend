@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class HelpRequest {
+public class TimeDonation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,29 +23,29 @@ public class HelpRequest {
     private Long version;
 
     @Column
-    private String topic;
-
-    @Column
     private Date start;
 
     @Column
     private Date end;
 
-    @OneToMany(mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column
+    private String remarks;
+
+    @OneToMany(mappedBy = "donation", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Requirement> requirements;
 
-    public static HelpRequest fromDto(HelpDTO dto) {
-        HelpRequest helpRequest = HelpRequest.builder()
-                .topic(dto.getTopic())
+    public static TimeDonation fromDto(HelpDTO dto) {
+        TimeDonation timeDonation = TimeDonation.builder()
+                .id(dto.getId())
                 .start(dto.getFrom())
                 .end(dto.getTo())
+                .remarks(dto.getRemarks())
                 .requirements(dto.getRequirementsList().stream().map(r -> Requirement.builder()
                         .requirement(r.name())
-                        .build()).collect(Collectors.toSet()))
-                .build();
+                        .build()).collect(Collectors.toSet())).build();
 
-        helpRequest.getRequirements().forEach(r -> r.setRequest(helpRequest));
+       timeDonation.getRequirements().forEach(r -> r.setDonation(timeDonation));
 
-        return helpRequest;
+        return timeDonation;
     }
 }

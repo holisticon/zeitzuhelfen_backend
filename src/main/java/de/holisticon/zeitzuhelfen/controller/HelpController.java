@@ -23,6 +23,6 @@ public class HelpController {
 
     @GetMapping
     public List<HelpDTO> get() {
-        return helpRequestRepository.findAll().stream().map(HelpDTO::fromEntity).collect(Collectors.toList());
+        return helpRequestRepository.findAll().stream().map(HelpDTO::fromHelpRequest).collect(Collectors.toList());
     }
 }

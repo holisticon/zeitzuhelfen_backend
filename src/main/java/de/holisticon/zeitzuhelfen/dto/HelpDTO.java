@@ -3,6 +3,7 @@ package de.holisticon.zeitzuhelfen.dto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.holisticon.zeitzuhelfen.domain.HelpRequest;
+import de.holisticon.zeitzuhelfen.domain.TimeDonation;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -36,12 +37,22 @@ public class HelpDTO {
         this.remarks = remarks;
     }
 
-    public static HelpDTO fromEntity(HelpRequest entity) {
+    public static HelpDTO fromHelpRequest(HelpRequest entity) {
         return HelpDTO.builder()
                 .id(entity.getId())
                 .topic(entity.getTopic())
                 .from(entity.getStart())
                 .to(entity.getEnd())
+                .requirementsList(entity.getRequirements().stream().map(r -> Requirements.valueOf(r.getRequirement())).collect(Collectors.toList()))
+                .build();
+    }
+
+    public static HelpDTO fromTimeDonation(TimeDonation entity) {
+        return HelpDTO.builder()
+                .id(entity.getId())
+                .from(entity.getStart())
+                .to(entity.getEnd())
+                .remarks(entity.getRemarks())
                 .requirementsList(entity.getRequirements().stream().map(r -> Requirements.valueOf(r.getRequirement())).collect(Collectors.toList()))
                 .build();
     }

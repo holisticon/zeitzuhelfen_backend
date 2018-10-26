@@ -18,7 +18,12 @@ public class Requirement {
     @Column
     private String requirement;
 
+    @Setter
     @ManyToOne
     private HelpRequest request;
+
+    @Setter
+    @ManyToOne
+    private TimeDonation donation;
 
 }
