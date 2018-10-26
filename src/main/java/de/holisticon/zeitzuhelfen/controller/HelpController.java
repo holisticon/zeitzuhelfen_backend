@@ -1,27 +1,28 @@
 package de.holisticon.zeitzuhelfen.controller;
 
+import de.holisticon.zeitzuhelfen.domain.HelpRequest;
+import de.holisticon.zeitzuhelfen.domain.HelpRequestRepository;
 import de.holisticon.zeitzuhelfen.dto.HelpDTO;
-import de.holisticon.zeitzuhelfen.dto.Requirements;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/help")
+@RequiredArgsConstructor
 public class HelpController {
 
+    private final HelpRequestRepository helpRequestRepository;
+
     @PutMapping
-    public void create(HelpDTO helpDTO) {
-        // TODO: 26.10.18
+    public void create(@RequestBody HelpDTO helpDTO) {
+        helpRequestRepository.save(HelpRequest.fromDto(helpDTO));
     }
 
     @GetMapping
     public List<HelpDTO> get() {
-        // TODO:
-        return Collections.emptyList();
+        return helpRequestRepository.findAll().stream().map(HelpDTO::fromEntity).collect(Collectors.toList());
     }
 }

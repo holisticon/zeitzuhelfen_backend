@@ -1,3 +1,8 @@
 auth0:
   issuer: https://zeitzuhelfen.eu.auth0.com/
   apiAudience: https://zeitzuhelfen-api.herokuapp.com
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
