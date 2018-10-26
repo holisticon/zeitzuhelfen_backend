@@ -1,0 +1,3 @@
+auth0:
+  issuer: https://zeitzuhelfen.eu.auth0.com/api/v2/
+  apiAudience: 5bd2db40a3f74219c4089c31
