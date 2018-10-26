@@ -28,8 +28,8 @@ public class HelpController {
         return helpRequestRepository.findAll().stream().map(HelpDTO::fromHelpRequest).collect(Collectors.toList());
     }
 
-    @GetMapping
-    public List<HelpDTO> get(@RequestBody HelpDTO request) {
+    @GetMapping(path = "match")
+    public List<HelpDTO> find(@RequestBody HelpDTO request) {
         List<HelpRequest> possibleMatches = helpRequestRepository.findByStartGreaterThanEqualAndEndLessThanEqual(request.getFrom(), request.getTo());
 
         return possibleMatches.stream()
